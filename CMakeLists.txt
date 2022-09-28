@@ -8,8 +8,21 @@ cmake_minimum_required(VERSION 3.10)
 
 project(SimpleCMakeScripts VERSION 0.1)
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/scripts")
 
-include(${CMAKE_CURRENT_LIST_DIR}/internal/logging.cmake)
+set(SIMPLECMAKESCRIPTS_PROJECT_NAME
+	${CMAKE_PROJECT_NAME}
+	CACHE STRING
+	"The path to the directory containing the scripts"
+	FORCE
+)
 
-simplecmakescripts_print_module_path()
+set(SIMPLECMAKESCRIPTS_SCRIPTS_DIR
+	${CMAKE_CURRENT_LIST_DIR}/scripts
+	CACHE STRING
+	"The path to the directory containing the scripts"
+	FORCE
+)
+
+include(${CMAKE_CURRENT_LIST_DIR}/internal/basics.cmake)
+
+simplecmakescripts_enable()

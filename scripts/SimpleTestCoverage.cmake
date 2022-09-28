@@ -9,7 +9,7 @@
 # Test Coverage
 ################################################################################
 
-macro(setup_cxx_test_coverage TARGET_NAME BASE_DIR)
+macro(simple_cxx_test_coverage TARGET_NAME BASE_DIR)
 	if(UNIX AND NOT APPLE)
 		message(STATUS "Setting up C++ test coverage for target "
 				"${TARGET_NAME}, with base directory at ${BASE_DIR}.")
