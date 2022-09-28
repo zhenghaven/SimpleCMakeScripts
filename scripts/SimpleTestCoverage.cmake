@@ -85,4 +85,4 @@ macro(simple_cxx_test_coverage TARGET_NAME BASE_DIR)
 		message(WARNING "Test coverage setup is ignored in platforms "
 				"other than Linux.")
 	endif()
-endmacro(setup_cxx_test_coverage)
+endmacro(simple_cxx_test_coverage)

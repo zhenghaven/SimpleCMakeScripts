@@ -17,7 +17,7 @@ macro(simplecmakescripts_enable)
 	message(
 		STATUS
 		"${SIMPLECMAKESCRIPTS_PROJECT_NAME} - "
-		"Enabling in project ${CMAKE_PROJECT_NAME}..."
+		"Enabling in project ${PROJECT_NAME}..."
 	)
 
 	list(APPEND CMAKE_MODULE_PATH ${SIMPLECMAKESCRIPTS_SCRIPTS_DIR})

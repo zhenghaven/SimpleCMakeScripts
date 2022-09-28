@@ -6,11 +6,11 @@
 
 cmake_minimum_required(VERSION 3.10)
 
-project(SimpleCMakeScripts VERSION 0.1)
+project(SimpleCMakeScripts VERSION 0.3)
 
 
 set(SIMPLECMAKESCRIPTS_PROJECT_NAME
-	${CMAKE_PROJECT_NAME}
+	${PROJECT_NAME}
 	CACHE STRING
 	"The path to the directory containing the scripts"
 	FORCE
