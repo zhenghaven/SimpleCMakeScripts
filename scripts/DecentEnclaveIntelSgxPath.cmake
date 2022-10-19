@@ -51,15 +51,15 @@ else()
 endif()
 
 
+get_filename_component(
+	_DECENTENCLAVE_SGXSDK_HOME
+	${_DECENTENCLAVE_SGXSDK_HOME}
+	ABSOLUTE
+)
+
 if(NOT EXISTS ${_DECENTENCLAVE_SGXSDK_HOME})
 	message(FATAL_ERROR "Intel SGX SDK is not installed properly!")
 endif()
-
-get_filename_component(
-	_DECENTENCLAVE_SGXSDK_HOME
-	"$ENV{SGXSDKInstallPath}"
-	ABSOLUTE
-)
 
 set(
 	DECENTENCLAVE_SGXSDK_HOME
@@ -351,6 +351,29 @@ set(
 ################################################################################
 # Finished
 ################################################################################
+
+macro(decent_enclave_print_config_sgx)
+	message(STATUS "==================== INTEL SGX CONFIG ====================")
+	message(STATUS "Intel SGX SDK home:         "
+		"${DECENTENCLAVE_SGXSDK_HOME}")
+	message(STATUS "Intel SGX SDK include:      "
+		"${DECENTENCLAVE_SGXSDK_INCLUDE}")
+	message(STATUS "Intel SGX SDK include C:    "
+		"${DECENTENCLAVE_SGXSDK_INCLUDE_C}")
+	message(STATUS "Intel SGX SDK include C++:  "
+		"${DECENTENCLAVE_SGXSDK_INCLUDE_CXX}")
+	message(STATUS "Intel SGX SDK C flags:      "
+		"${DECENTENCLAVE_SGXSDK_TRUSTED_C_FLAGS}")
+	message(STATUS "Intel SGX SDK C++ flags:    "
+		"${DECENTENCLAVE_SGXSDK_TRUSTED_CXX_FLAGS}")
+	message(STATUS "Intel SGX SDK linker flags: "
+		"${DECENTENCLAVE_SGXSDK_TRUSTED_LINKER_FLAGS}")
+	message(STATUS "Intel SGX SDK edger8r:      "
+		"${DECENTENCLAVE_SGXSDK_EDGER}")
+	message(STATUS "Intel SGX SDK signer:       "
+		"${DECENTENCLAVE_SGXSDK_SIGNER}")
+	message(STATUS "==========================================================")
+endmacro(decent_enclave_print_config_sgx)
 
 message(STATUS "Finished setting Intel SGX Variables.")
 message(STATUS "")
