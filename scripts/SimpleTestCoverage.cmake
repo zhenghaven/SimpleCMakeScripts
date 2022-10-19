@@ -4,6 +4,8 @@
 # https://opensource.org/licenses/MIT.
 
 
+include_guard()
+
 
 ################################################################################
 # Test Coverage
