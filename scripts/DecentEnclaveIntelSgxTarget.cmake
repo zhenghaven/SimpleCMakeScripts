@@ -136,8 +136,13 @@ macro(_decent_enclave_add_target_sgx_add_trusted)
 		PROPERTY CXX_STANDARD 11)
 
 	#defines:
-	target_compile_definitions(${_SGX_TARGET_TARGET_NAME}_trusted
-		PRIVATE SECURE_ENCLAVE_ENV INTEL_SGX ${_SGX_TARGET_TRUSTED_DEF})
+	target_compile_definitions(
+		${_SGX_TARGET_TARGET_NAME}_trusted
+		PRIVATE
+			DECENT_ENCLAVE_PLATFORM_SGX
+			DECENT_ENCLAVE_PLATFORM_SGX_TRUSTED
+			${_SGX_TARGET_TRUSTED_DEF}
+	)
 
 	#compiler flags:
 	target_compile_options(${_SGX_TARGET_TARGET_NAME}_trusted
@@ -212,11 +217,15 @@ macro(_decent_enclave_add_target_sgx_add_untrusted)
 		PROPERTY CXX_STANDARD 11)
 
 	#defines:
-	target_compile_definitions(${_SGX_TARGET_TARGET_NAME}
-		PRIVATE INTEL_SGX
-				INTEL_SGX_TRUSTED_LIB="${_SGX_TARGET_TRUSTED_LIB_SIGNED}"
-				INTEL_SGX_ECTOKEN="${_SGX_TARGET_TARGET_NAME}_Enclave.token"
-				${_SGX_TARGET_UNTRUSTED_DEF})
+	target_compile_definitions(
+		${_SGX_TARGET_TARGET_NAME}
+		PRIVATE
+			DECENT_ENCLAVE_PLATFORM_SGX
+			DECENT_ENCLAVE_PLATFORM_SGX_UNTRUSTED
+			DECENT_ENCLAVE_PLATFORM_SGX_IMAGE="${_SGX_TARGET_TRUSTED_LIB_SIGNED}"
+			DECENT_ENCLAVE_PLATFORM_SGX_TOKEN="${_SGX_TARGET_TARGET_NAME}_Enclave.token"
+			${_SGX_TARGET_UNTRUSTED_DEF}
+	)
 
 	#compiler flags:
 	target_compile_options(${_SGX_TARGET_TARGET_NAME}
