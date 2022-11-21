@@ -139,6 +139,7 @@ macro(_decent_enclave_add_target_sgx_add_trusted)
 	target_compile_definitions(
 		${_SGX_TARGET_TARGET_NAME}_trusted
 		PRIVATE
+			DECENT_ENCLAVE_TRUSTED
 			DECENT_ENCLAVE_PLATFORM_SGX
 			DECENT_ENCLAVE_PLATFORM_SGX_TRUSTED
 			${_SGX_TARGET_TRUSTED_DEF}
