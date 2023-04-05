@@ -452,7 +452,7 @@ if(NOT TARGET IntelSGX::Untrusted::Libs)
 		INTERFACE ${DECENTENCLAVE_SGXSDK_INCLUDE}
 	)
 	target_link_libraries(IntelSGX::Untrusted::Libs INTERFACE
-		# IntelSGX::Untrusted::service (Deprecated with EPID)
+		IntelSGX::Untrusted::service
 		IntelSGX::Untrusted::rts
 		IntelSGX::Untrusted::key_exchange
 		IntelSGX::Untrusted::file_system
