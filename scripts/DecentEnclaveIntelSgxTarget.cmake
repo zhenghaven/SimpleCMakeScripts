@@ -46,11 +46,13 @@ macro(_decent_encalve_add_target_sgx_print_target_info)
 	message(STATUS "TARGET_NAME        = ${_SGX_TARGET_TARGET_NAME}")
 	message(STATUS "UNTRUSTED_SOURCE   = ${_SGX_TARGET_UNTRUSTED_SOURCE}")
 	message(STATUS "UNTRUSTED_DEF      = ${_SGX_TARGET_UNTRUSTED_DEF}")
+	message(STATUS "UNTRUSTED_INCL_DIR = ${_SGX_TARGET_UNTRUSTED_INCL_DIR}")
 	message(STATUS "UNTRUSTED_COMP_OPT = ${_SGX_TARGET_UNTRUSTED_COMP_OPT}")
 	message(STATUS "UNTRUSTED_LINK_OPT = ${_SGX_TARGET_UNTRUSTED_LINK_OPT}")
 	message(STATUS "UNTRUSTED_LINK_LIB = ${_SGX_TARGET_UNTRUSTED_LINK_LIB}")
 	message(STATUS "TRUSTED_SOURCE     = ${_SGX_TARGET_TRUSTED_SOURCE}")
 	message(STATUS "TRUSTED_DEF        = ${_SGX_TARGET_TRUSTED_DEF}")
+	message(STATUS "TRUSTED_INCL_DIR   = ${_SGX_TARGET_TRUSTED_INCL_DIR}")
 	message(STATUS "TRUSTED_COMP_OPT   = ${_SGX_TARGET_TRUSTED_COMP_OPT}")
 	message(STATUS "TRUSTED_LINK_OPT   = ${_SGX_TARGET_TRUSTED_LINK_OPT}")
 	message(STATUS "TRUSTED_LINK_LIB   = ${_SGX_TARGET_TRUSTED_LINK_LIB}")
@@ -144,6 +146,13 @@ macro(_decent_enclave_add_target_sgx_add_trusted)
 			${_SGX_TARGET_TRUSTED_DEF}
 	)
 
+	#include directories:
+	target_include_directories(
+		${_SGX_TARGET_TARGET_NAME}_trusted
+		PRIVATE
+			${_SGX_TARGET_TRUSTED_INCL_DIR}
+	)
+
 	#compiler flags:
 	target_compile_options(${_SGX_TARGET_TARGET_NAME}_trusted
 		PRIVATE ${DECENTENCLAVE_SGXSDK_TRUSTED_C_FLAGS}
@@ -227,6 +236,13 @@ macro(_decent_enclave_add_target_sgx_add_untrusted)
 			${_SGX_TARGET_UNTRUSTED_DEF}
 	)
 
+	#include directories:
+	target_include_directories(
+		${_SGX_TARGET_TARGET_NAME}
+		PRIVATE
+			${_SGX_TARGET_UNTRUSTED_INCL_DIR}
+	)
+
 	#compiler flags:
 	target_compile_options(${_SGX_TARGET_TARGET_NAME}
 		PRIVATE ${_SGX_TARGET_UNTRUSTED_COMP_OPT})
@@ -262,11 +278,13 @@ endmacro(_decent_enclave_add_target_sgx_add_untrusted)
 # decent_enclave_add_target_sgx(<TARGET_NAME>
 # 		UNTRUSTED_SOURCE   <src1>;<src2>;...
 # 		UNTRUSTED_DEF      <def1>;<def2>;...
+# 		UNTRUSTED_INCL_DIR <dir1>;<dir2>;...
 # 		UNTRUSTED_COMP_OPT <opt1>;<opt2>;...
 # 		UNTRUSTED_LINK_OPT <opt1>;<opt2>;...
 # 		UNTRUSTED_LINK_LIB <lib1>;<lib2>;...
 # 		TRUSTED_SOURCE     <src1>;<src2>;...
 # 		TRUSTED_DEF        <def1>;<def2>;...
+# 		TRUSTED_INCL_DIR   <dir1>;<dir2>;...
 # 		TRUSTED_COMP_OPT   <opt1>;<opt2>;...
 # 		TRUSTED_LINK_OPT   <opt1>;<opt2>;...
 # 		TRUSTED_LINK_LIB   <lib1>;<lib2>;...
@@ -291,9 +309,9 @@ function(decent_enclave_add_target_sgx)
 	set(options "")
 	set(oneValueArgs EDL_PATH EDL_OUTPUT_DIR SIGN_CONFIG SIGN_KEY)
 	set(multiValueArgs
-		UNTRUSTED_SOURCE UNTRUSTED_DEF
+		UNTRUSTED_SOURCE UNTRUSTED_DEF UNTRUSTED_INCL_DIR
 		UNTRUSTED_COMP_OPT UNTRUSTED_LINK_OPT UNTRUSTED_LINK_LIB
-		TRUSTED_SOURCE   TRUSTED_DEF
+		TRUSTED_SOURCE   TRUSTED_DEF   TRUSTED_INCL_DIR
 		TRUSTED_COMP_OPT   TRUSTED_LINK_OPT   TRUSTED_LINK_LIB
 		EDL_INCLUDE
 	)
