@@ -309,6 +309,19 @@ elseif(UNIX)
 			IMPORTED_LOCATION                 "${DECENTENCLAVE_SGXSDK_LIB}/libsgx_uprotected_fs.a"
 		)
 	endif()
+	if(NOT TARGET IntelSGX::Untrusted::capable)
+		add_library(IntelSGX::Untrusted::capable STATIC IMPORTED GLOBAL)
+		set_target_properties(IntelSGX::Untrusted::capable PROPERTIES
+			IMPORTED_CONFIGURATIONS Release Debug DebugSimulation)
+		target_include_directories(
+			IntelSGX::Untrusted::capable
+			BEFORE
+			INTERFACE ${DECENTENCLAVE_SGXSDK_INCLUDE}
+		)
+		set_target_properties(IntelSGX::Untrusted::capable PROPERTIES
+			IMPORTED_LOCATION                 "${DECENTENCLAVE_SGXSDK_LIB}/libsgx_capable.a"
+		)
+	endif()
 
 	#######
 	# Trusted
