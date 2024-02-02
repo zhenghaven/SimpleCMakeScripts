@@ -431,6 +431,14 @@ elseif(UNIX)
 			IMPORTED_LOCATION                 "${DECENTENCLAVE_SGXSDK_LIB}/libsgx_tswitchless.a"
 		)
 	endif()
+	if(NOT TARGET IntelSGX::Trusted::pthread)
+		add_library(IntelSGX::Trusted::pthread STATIC IMPORTED GLOBAL)
+		set_target_properties(IntelSGX::Trusted::pthread PROPERTIES
+			IMPORTED_CONFIGURATIONS Release Debug DebugSimulation)
+		set_target_properties(IntelSGX::Trusted::pthread PROPERTIES
+			IMPORTED_LOCATION                 "${DECENTENCLAVE_SGXSDK_LIB}/libsgx_pthread.a"
+		)
+	endif()
 
 endif()
 
